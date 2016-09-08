@@ -1,0 +1,55 @@
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-3">
+
+			<div class="list-group">
+				<div class="input-group">
+	                <input type="search" ng-model="search.name" class="form-control" placeholder="Search..." />
+	                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+	            </div>
+            </div>
+
+            <div class="list-group">
+                <label>Role</label>
+                <select class="form-control" ng-model="search.role">
+                    <option value="">All</option>
+                    <option ng-repeat="role in getRoles()">{{role | capitalize}}</option>
+                </select>
+            </div>
+
+		</div>
+		
+		<div class="col-md-9">
+
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th>Username</th>
+						<th>Name</th>
+						<th>Lastname</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th class="text-center"></th>
+						<th class="text-center"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="user in listUsers | filter:search">
+						<th class="text-center">{{$index + 1 }}</th>
+						<th><a href="#/user/{{user.username}}">{{user.username}}</a></th>
+						<th>{{user.name}}</th>
+						<th>{{user.lastname}}</th>
+						<th>{{user.email}}</th>
+						<th>{{user.role | capitalize}}</th>
+						<th class="text-center"><a ng-show="canShow(user)" href="#/user/{{user.username}}"><i class="fa fa-pencil-square-o"></i></a></th>
+						<th class="text-center"><a ng-show="canShow(user)" ng-click="delete(user)"><i class="fa fa-trash-o"></i></a></th>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+</div>

@@ -1,0 +1,27 @@
+[{
+	"username": "santiago",
+	"password": "1q2w3e4r",
+	"name": "Santiago",
+	"lastname": "Moreno",
+	"email": "smoreno91@gmail.com",
+	"role": "user",
+	"loans": ["captain-america"]
+},
+{
+	"username": "daniel",
+	"password": "1q2w3e4r",
+	"name": "Daniel",
+	"lastname": "Restrepo",
+	"email": "daniel.restrepo@gmail.com",
+	"role": "user",
+	"loans": ["arrow"]
+},
+{
+	"username": "admin",
+	"password": "1q2w3e4r",
+	"name": "Admin",
+	"lastname": "Admin",
+	"email": "santiago.moreno@globant.com",
+	"role": "admin",
+	"loans": []
+}]

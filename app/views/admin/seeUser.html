@@ -1,0 +1,50 @@
+<div class="container">
+
+	<div class="row user-info">
+
+		<div class="col-md-3">
+			<a class="btn btn-default" href="#/users"><i class="fa fa-arrow-left"></i> Back to users list</a>
+		</div>
+		
+		<div class="col-md-9">
+
+			<h2>Information</h1>
+
+			<dl class="dl-horizontal">
+				<dt>Name</dt>
+				<dd>{{user.name}}</dd>
+
+				<dt>Lastname</dt>
+				<dd>{{user.lastname}}</dd>
+
+				<dt>Username</dt>
+				<dd>{{user.username}}</dd>
+
+				<dt>Email</dt>
+				<dd>{{user.email}}</dd>
+
+				<dt>Role</dt>
+				<dd>{{user.role | capitalize}}</dd>
+			</dl>
+
+			<h2>Loans</h2>
+			<p ng-show="listComics.length == 0">No loans yet!</p>
+			<div ng-repeat="comic in listComics" class="col-sm-4">
+                <div class="thumbnail">
+                    <div class="caption text-center">
+                        <h4>{{comic.name}}</h4>
+                    </div>
+                    <div class="image-comic">
+                        <img ng-src="{{comic.image}}" alt="{{comic.name}}" />
+                    </div>
+                    <div class="ratings text-center">
+                    	<a ng-click="returnComic(comic)" class="btn btn-primary">Return Comic</a>
+                    </div>
+                </div>
+            </div>
+
+		</div>
+
+	</div>
+
+</div>

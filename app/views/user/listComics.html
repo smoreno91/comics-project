@@ -1,0 +1,124 @@
+<carousel-view></carousel-view>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-sm-3 sidebar">
+
+            <div class="list-group">
+                <div class="input-group">
+                    <input type="search" ng-model="search.name" class="form-control" placeholder="Search by name..." />
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                </div>
+            </div>
+
+            <label>Genre</label>
+            <div class="list-group">
+                <select class="form-control" ng-model="search.genre">
+                    <option value="">All genres</option>
+                    <option ng-repeat="genre in getGenres()">{{genre}}</option>
+                </select>
+            </div>
+
+            <label>Edition</label>
+            <div class="list-group">
+                <select class="form-control" ng-model="search.edition">
+                    <option value="">All editions</option>
+                    <option ng-repeat="edition in getEditions()">{{edition}}</option>
+                </select>
+            </div>
+
+            <label>Character</label>
+            <div class="list-group">
+                <select class="form-control" ng-model="search.character">
+                    <option value="">All characters</option>
+                    <option ng-repeat="character in getCharacters()">{{character}}</option>
+                </select>
+            </div>
+
+            <label>Sort by</label>
+            <div class="list-group">                
+                <a ng-click="orderBy = 'stars'; reverse = !reverse" class="list-group-item">
+                    <span class="badge" ng-show="orderBy == 'stars'">
+                        <i ng-show="reverse" class="fa fa-chevron-up"></i>
+                        <i ng-show="!reverse" class="fa fa-chevron-down"></i>
+                    </span><i class="fa fa-star"></i> Popular
+                </a>
+                <a ng-click="orderBy = 'searchs'; reverse = !reverse" class="list-group-item">
+                    <span class="badge" ng-show="orderBy == 'searchs'">
+                        <i ng-show="reverse" class="fa fa-chevron-up"></i>
+                        <i ng-show="!reverse" class="fa fa-chevron-down"></i>
+                    </span><i class="fa fa-search"></i> Top searches
+                </a>
+                <a ng-click="orderBy = 'recommended'; reverse = !reverse" class="list-group-item">
+                    <span class="badge" ng-show="orderBy == 'recommended'">
+                        <i ng-show="reverse" class="fa fa-chevron-up"></i>
+                        <i ng-show="!reverse" class="fa fa-chevron-down"></i>
+                    </span><i class="fa fa-thumbs-o-up"></i> Recommended
+                </a>
+            </div>
+
+            <label>Advanced Search</label>
+            <a class="pull-right" ng-click="showAdvancedSearh = !showAdvancedSearh;">
+                <i ng-show="!showAdvancedSearh" class="fa fa-plus"></i>
+                <i ng-show="showAdvancedSearh" class="fa fa-minus"></i>
+            </a>
+            <div class="list-group advanced-search" ng-show="showAdvancedSearh">
+                <div class="input-group">
+                    <input type="search" ng-model="search.creator" class="form-control" placeholder="Search by creator..." />
+                    <span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
+                </div>
+                <div class="input-group">
+                    <select class="form-control" ng-model="search.recommended">
+                        <option value="">All comics</option>
+                        <option value="1">Recommended</option>
+                        <option value="0">No recommended</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-thumbs-o-up"></i></span>
+                </div>
+                <div class="input-group">
+                    <select class="form-control" ng-model="search.loans">
+                        <option value="">All comics</option>
+                        <option value="!0">Available to borrow</option>
+                        <option value="0">Not available to borrow</option>
+                    </select>
+                    <span class="input-group-addon"><i class="fa fa-bookmark"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9">
+
+            <div class="row">
+
+                <div ng-repeat="comic in listComics | orderBy:orderBy:reverse | filter:search" class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <div class="image-comic">
+                            <a href="#/see/{{comic.id}}"><img ng-src="{{comic.image}}" alt="{{comic.name}}" /></a>
+                        </div>
+                        <div class="caption text-center">
+                            <h4>
+                                <a href="#/see/{{comic.id}}">{{comic.name}}</a> | 
+                                <span ng-show="comic.recommended == '1'"><i class="fa fa-thumbs-o-up"></i></span>
+                                <span ng-show="comic.recommended == '0'"><i class="fa fa-thumbs-o-down"></i></span>
+                            </h4>                            
+                        </div>
+                        <div class="ratings text-center">
+                            <p>By {{comic.creator}}</p>
+                            <p>{{comic.genre}}</p>
+                            <p>{{comic.edition}}'s Edition</p>
+                            <p>{{comic.reviews.length}} Reviews</p>
+                            <stars-comic stars="getStarsAverage(comic.reviews, true)"></stars-comic>
+                            <p><a class="btn btn-info" href="#/see/{{comic.id}}">Want to borrow? <i class="fa fa-bookmark"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+		
+    </div>
+
+</div>

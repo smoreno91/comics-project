@@ -1,0 +1,92 @@
+<div class="container">
+	<div class="row">
+
+        <div class="col-md-12">
+
+        	<div class="row">
+	            <div class="list-group">
+	                <div class="input-group">
+	                    <input type="search" ng-model="search.name" class="form-control" placeholder="Search..." />
+	                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+	                </div>
+	            </div>
+
+        		<a class="btn btn-primary" href="#/add"><i class="fa fa-plus"></i> New comic</a>
+        		<br><br>
+        	</div>
+
+        	<div class="clearfix"></div>
+
+            <div class="row">
+
+            	<table class="table table-hover">
+					<thead>
+						<tr>
+							<th class="text-center">#</th>
+							<th>
+								<a ng-click="orderBy = 'name'; reverse = !reverse">
+									Name 
+									<i ng-show="orderBy == 'name' && reverse" class="fa fa-chevron-down"></i>
+									<i ng-show="orderBy == 'name' && !reverse" class="fa fa-chevron-up"></i>
+								</a>
+							</th>
+							<th class="text-center">
+								<a ng-click="orderBy = 'recommended'; reverse = !reverse">
+									Recommended 
+									<i ng-show="orderBy == 'recommended' && reverse" class="fa fa-chevron-down"></i>
+									<i ng-show="orderBy == 'recommended' && !reverse" class="fa fa-chevron-up"></i>
+								</a>
+							</th>
+							<th class="text-center">
+								<a ng-click="orderBy = 'searchs'; reverse = !reverse">
+									Views 
+									<i ng-show="orderBy == 'searchs' && reverse" class="fa fa-chevron-down"></i>
+									<i ng-show="orderBy == 'searchs' && !reverse" class="fa fa-chevron-up"></i>
+								</a>
+							</th>
+							<th class="text-center">
+								<a ng-click="orderBy = 'reviews.length'; reverse = !reverse">
+									Reviews 
+									<i ng-show="orderBy == 'reviews.length' && reverse" class="fa fa-chevron-down"></i>
+									<i ng-show="orderBy == 'reviews.length' && !reverse" class="fa fa-chevron-up"></i>
+								</a>
+							</th>
+							<th class="text-center">Stars</th>
+							<th class="text-center">
+								<a ng-click="orderBy = 'loans'; reverse = !reverse">
+									Availability 
+									<i ng-show="orderBy == 'loans' && reverse" class="fa fa-chevron-down"></i>
+									<i ng-show="orderBy == 'loans' && !reverse" class="fa fa-chevron-up"></i>
+								</a>
+							</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="comic in listComics | orderBy:orderBy:reverse | filter:search">
+							<th class="text-center">{{$index + 1}}</th>
+							<th>{{comic.name}}</th>
+
+							<th class="text-center" ng-show="comic.recommended == 1"><i class="fa fa-thumbs-o-up"></i></th>
+							<th class="text-center" ng-show="comic.recommended == 0"><i class="fa fa-thumbs-o-down"></i></th>
+
+							<th class="text-center">{{comic.searchs}} <i class="fa fa-eye"></i></th>
+
+							<th class="text-center">{{comic.reviews.length}} <i class="fa fa-align-left"></i></th>
+
+							<th class="text-center"><stars-comic stars="getStarsAverage(comic.reviews, true)"><stars-comic></th>
+
+							<th class="text-center" ng-show="comic.loans">{{comic.loans}} <i class="fa fa-check-circle"></i></th>
+							<th class="text-center" ng-show="!comic.loans"> <i class="fa fa-minus-circle"></i></th>
+
+							<th class="text-center"><a href="#/edit/{{comic.id}}"><i class="fa fa-pencil-square-o"></i> Edit</a></th>
+						</tr>
+					</tbody>
+				</table>
+
+            </div>
+
+        </div>
+
+	</div>
+</div>

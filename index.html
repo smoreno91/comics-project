@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+  	<meta charset="utf-8" />
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  	<title>Comics</title>
+  	<script>document.write('<base href="' + document.location + '" />');</script>
+  
+  	<script src="./assets/js/angular.min.js"></script>
+	<script src="./assets/js/angular-animate.min.js"></script>
+	<script src="./assets/js/angular-route.min.js"></script>
+	
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	
+	<script src="./app/app.js"></script>
+	<script src="./app/routes.js"></script>
+
+	<script src="./app/directives/mainDirective.js"></script>
+	<script src="./app/services/mainService.js"></script>
+
+	<script src="./app/controllers/mainController.js"></script>
+	<script src="./app/controllers/commonController.js"></script>
+  	<script src="./app/controllers/userController.js"></script>
+	<script src="./app/controllers/adminController.js"></script>
+
+	<link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="./assets/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="./assets/css/styles.css" />	
+</head>
+
+<body ng-controller="MainController" class="{{bodyClass}}">
+	<header-view ng-show="canShowHeaderFooter()"></header-view>
+	<div ng-view></div>
+	<footer-view ng-show="canShowHeaderFooter()"></footer-view>
+</body>
+
+</html>

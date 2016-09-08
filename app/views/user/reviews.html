@@ -1,0 +1,40 @@
+<carousel-view></carousel-view>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+            <div class="list-group">
+                <a href="#/account" class="list-group-item">Account</a>
+                <a ng-hide="isAdmin()" href="#/loans" class="list-group-item">Loans</a>
+                <a ng-hide="isAdmin()" href="#/reviews" class="list-group-item active">Reviews</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <h4 ng-show="listReviews.length == 0">You haven't done any review!</h4>
+
+            <table class="table table-hover" ng-hide="listReviews.length == 0">
+                <thead>
+                    <tr>
+                        <th class="text-center">#</th>
+                        <th>Comic</th>
+                        <th>Comment</th>
+                        <th class="text-center">Stars</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="review in listReviews">
+                        <th class="text-center">{{$index + 1 }}</th>
+                        <th>{{review.comic}}</th>
+                        <th>{{review.comment}}</th>
+                        <th class="text-center">
+                            <stars-comic stars="review.stars"></stars-comic>
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+	</div>
+</div>

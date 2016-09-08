@@ -1,0 +1,32 @@
+<carousel-view></carousel-view>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+            <div class="list-group">
+                <a href="#/account" class="list-group-item">Account</a>
+                <a ng-hide="isAdmin()" href="#/loans" class="list-group-item active">Loans</a>
+                <a ng-hide="isAdmin()" href="#/reviews" class="list-group-item">Reviews</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <h4 ng-show="listComics.length == 0">You haven't borrowed any comics!</h4>
+        	<div ng-repeat="comic in listComics" class="col-sm-4">
+                <div class="thumbnail">
+                    <div class="caption text-center">
+                        <h4><a href="#/see/{{comic.id}}">{{comic.name}}</a></h4>
+                    </div>
+                    <div class="image-comic">
+                        <a href="#/see/{{comic.id}}"><img ng-src="{{comic.image}}" alt="{{comic.name}}" /></a>
+                    </div>
+                    <div class="ratings text-center">
+                        <stars-comic stars="getStarsAverage(comic.reviews, true)"></stars-comic>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+	</div>
+</div>

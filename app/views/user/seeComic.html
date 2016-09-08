@@ -1,0 +1,97 @@
+<div class="container">
+
+	<div class="row">
+		<a class="btn btn-default" href="#/comics"><i class="fa fa-arrow-left"></i> Back to Comics list</a>
+	</div>
+
+	<div class="clearfix"></div>
+    <br>
+
+    <div class="row comic-info">
+
+    	<div class="col-md-4">
+    		<div class="thumbnail">
+    			<img ng-src="{{comic.image}}" alt="{{comic.name}}">
+    		</div>
+    	</div>
+
+    	
+    	<div class="col-md-8">
+    		<h1>{{comic.name}}
+                <span ng-show="comic.recommended == '1'"><i class="fa fa-thumbs-o-up"></i></span>
+                <span ng-show="comic.recommended == '0'"><i class="fa fa-thumbs-o-down"></i></span>
+            </h1> 
+
+            <h4>Description</h4>
+            <p>{{comic.description}}</p>
+
+            <h4>Edition</h4>
+            <p>{{comic.edition}}</p>
+
+            <h4>Creator</h4>
+            <p>{{comic.creator}}</p>
+
+            <h4>Genre</h4>
+            <p>{{comic.genre}}</p>
+
+            <h4>Character</h4>
+            <p>{{comic.character}}</p>
+
+            <a ng-show="userCanBorrow() && comic.loans != 0" ng-click="borrowComic(comic)" class="btn btn-info">Borrow <i class="fa fa-bookmark"></i></a>
+            <div class="alert alert-success" role="alert" ng-hide="userCanBorrow()">
+                <p>You've borrowed this comic!</p>
+            </div>
+            <div class="alert alert-danger" role="alert" ng-show="userCanBorrow() && comic.loans == 0">
+                <p>This comic is not available for borrow</p>
+            </div>
+    	</div>
+
+    </div>
+
+    <div class="row comic-reviews">
+        <div class="col-md-6">
+        	<h3>Reviews</h3>
+            <p ng-show="!comic.reviews.length">There is not reviews yet! Be the first one</p>
+
+            <dl class="dl-horizontal">
+                <dt ng-repeat-start="review in comic.reviews">
+                    <h5>{{review.username}}</h5>
+                    <stars-comic stars="review.stars"></stars-comic>
+                </dt>
+                <dd ng-repeat-end><p>{{review.comment}}</p></dd>
+            </dl>
+        </div>
+
+        <div class="col-md-6">
+
+            <h3>Add new review</h3>
+
+            <form name="reviewForm" ng-submit="submitReviewForm(reviewForm.$valid, newReview)" novalidate>
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-align-left"></i></span>
+                        <textarea id="comment" name="comment" ng-model="newReview.comment" class="form-control" required="required"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="stars">Stars</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-star"></i></span>
+                        <select id="stars" name="stars" ng-model="newReview.stars" class="form-control" required="required">
+                            <option ng-repeat="i in range(5) track by $index">{{$index + 1}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit" ng-disabled="reviewForm.$invalid"><i class="fa fa-floppy-o"></i> Add</button>
+
+                <br><br>
+
+                <div class="alert alert-{{alertType}}" ng-show="message" ng-bind="message" role="alert">asd</div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
